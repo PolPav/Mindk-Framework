@@ -1,0 +1,15 @@
+{
+    "name": "polpav/mindk",
+    "license": "GNU/GPL",
+    "authors": [
+        {
+            "name": "Pavel Polyakov",
+            "email": "pavlushka.8888@gmail.com"
+        }
+    ],
+    "autoload": {
+    	"psr-4": {
+    		"shop\\": ""
+    	}
+    }
+}
