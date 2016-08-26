@@ -7,10 +7,6 @@
  */
 
 namespace polpav\framework;
-require_once 'FactoryAdapter.php';
-
-
-
 
 class App
 {
@@ -18,7 +14,6 @@ class App
      * @var array config
      */
     private $config = [];
-    public $factory;
 
     /**
      * @param $name
