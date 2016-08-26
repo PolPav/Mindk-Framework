@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'shop\\' => array($baseDir . '/'),
+    'polpav\\' => array($vendorDir),
 );

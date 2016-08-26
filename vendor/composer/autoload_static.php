@@ -11,12 +11,20 @@ class ComposerStaticInitb0ff6fd9be11af405d3655595edfb8ad
         array (
             'shop\\' => 5,
         ),
+        'p' => 
+        array (
+            'polpav\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'shop\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',
+        ),
+        'polpav\\' => 
+        array (
+            0 => 'C:\\OpenServer\\domains\\MindK-Shop\\vendor',
         ),
     );
 
