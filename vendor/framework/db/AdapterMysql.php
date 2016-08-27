@@ -20,27 +20,24 @@ class AdapterMysql implements AdapterDB
 
 
     function query($sql){
-        $this->db->query($sql);
-        if($this->db->error){
-            echo $this->db->error;
-        }
+       return $this->db->query($sql);
     }
 
     function fetch($result, $array_type){
         switch ($array_type){
-            case 'index':$this->db->$result->fetch_array(MYSQLI_NUM);
+            case 'index': return $result->fetch_array(MYSQLI_NUM);
                 break;
-            case 'assoc': $this->db->$result->fetch_array(MYSQLI_ASSOC);
+            case 'assoc': return $result->fetch_array(MYSQLI_ASSOC);
                 break;
-            case 'both': $this->db->$result->fetch_array(MYSQLI_BOTH);
+            case 'both': return $result->fetch_array(MYSQLI_BOTH);
                 break;
-            default : echo $result->$this->db->error;
+            default : return $this->db->error;
 
         }
     }
     function close()
     {
-        $this->db->close();
+       return $this->db->close();
     }
 
 
