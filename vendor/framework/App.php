@@ -7,9 +7,6 @@
  */
 
 namespace polpav\framework;
-require_once 'FactoryAdapter.php';
-
-
 
 
 class App
@@ -18,7 +15,6 @@ class App
      * @var array config
      */
     private $config = [];
-    public $factory;
 
     /**
      * @param $name
@@ -49,16 +45,14 @@ class App
         echo "Done<br>";
     }
 
-    /** function takes a array and call method index() in selected route
+    /** function takes a array and call method in selected route
      * @param $routing_map
+     * @return object
      */
     public function route($routing_map){
-        $query = $_SERVER['REQUEST_URI'];
-        if (array_key_exists($query, $routing_map)) {
-            $class = new $routing_map[$query]();
-            $class->index();
-        }
+        return  Router::getInstance($routing_map);
     }
+
 
     /** function takes a $name database and configuration to connected with factory method getConnection()
      * @param $name

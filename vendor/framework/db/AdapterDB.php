@@ -12,7 +12,9 @@ namespace polpav\framework\db;
 interface AdapterDB
 {
 
-    function  query($sql);
-    function  fetch($result, $array_type);
+    function query($sql);
+
+    function fetch($result, $array_type);
+
     function close();
 }

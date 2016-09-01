@@ -11,8 +11,12 @@ namespace shop\app;
 
 class Delivery extends AShop
 {
-    public function index(){
-        parent::index();
-        echo "<h3>You in Delivery</h3>";
+    public function __construct(){
+        parent::__construct();
+        echo "<h2>You in Delivery</h2>";
+    }
+
+    public function deliveryMethod(){
+        echo "<h3>action: deliveryMethod,<br> param: not have param<br></h3>";
     }
 }

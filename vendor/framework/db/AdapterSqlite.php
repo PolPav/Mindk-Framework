@@ -11,6 +11,10 @@ namespace polpav\framework\db;
 
 class AdapterSqlite implements AdapterDB
 {
+    function __construct()
+    {
+        echo "Database SQLite Connected";
+    }
 
     function  query($sql){}
     function  fetch($result, $array_type){}

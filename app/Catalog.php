@@ -11,8 +11,12 @@ namespace shop\app;
 
 class Catalog extends AShop
 {
-    public function index(){
-        parent::index();
-        echo "<h3>You in Catalog</h3>";
+    public function __construct(){
+        parent::__construct();
+        echo "<h2>You in Catalog</h2>";
+    }
+
+    public function catalogMethod($param){
+        echo "<h3>action: catalogMethod,<br> param: $param<br></h3>";
     }
 }

@@ -11,7 +11,7 @@ namespace shop\app;
 
 abstract class AShop
 {
-   public function index(){
+    public function __construct(){
         echo "<br><h1>Hello Guest</h1><br>";
     }
 }

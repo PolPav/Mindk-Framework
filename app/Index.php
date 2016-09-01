@@ -11,8 +11,9 @@ namespace shop\app;
 
 class Index extends AShop
 {
-    function index(){
-        parent::index();
-        echo "<h3>You in Home Page</h3>";
+    public function __construct(){
+        parent::__construct();
+        echo "<h2>You in Home Page</h2>";
     }
+
 }

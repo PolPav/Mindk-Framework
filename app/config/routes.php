@@ -1,9 +1,29 @@
 <?php
 return[
-    '/' => 'shop\app\Index',
-    '/catalog' => 'shop\app\Catalog',
-    '/search' => 'shop\app\Search',
-    '/delivery' => 'shop\app\Delivery',
-    '/contacts' => 'shop\app\Contacts',
-    '/basket' => 'shop\app\Basket',
+
+    ['pattern' => '',
+        'class' => 'shop\app\Index'],
+
+
+    ['pattern' => 'catalog',
+        'class' => 'shop\app\Catalog',
+        'method' => 'catalogMethod'],
+
+    ['pattern' => 'basket',
+        'class' => 'shop\app\Basket',
+        'method' => 'basketMethod'],
+
+    ['pattern' => 'delivery',
+        'class' => 'shop\app\Delivery',
+        'method' => 'deliveryMethod'],
+
+    ['pattern' => 'search',
+        'class' => 'shop\app\Search',
+        'method' => 'searchMethod'],
+
+
+    ['pattern' => 'contacts',
+        'class' => 'shop\app\Contacts',
+        'method' => 'contactsMethod'],
+
 ];

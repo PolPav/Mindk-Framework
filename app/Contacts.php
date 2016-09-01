@@ -11,8 +11,12 @@ namespace shop\app;
 
 class Contacts extends AShop
 {
-    public function index(){
-        parent::index();
-        echo "<h3>You in Contacts</h3>";
+    public function __construct(){
+        parent::__construct();
+        echo "<h2>You in Contacts</h2>";
+    }
+
+    public function contactsMethod($param){
+        echo "<h3>action: contactsMethod,<br> param: $param<br></h3>";
     }
 }

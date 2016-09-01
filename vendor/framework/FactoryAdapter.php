@@ -14,20 +14,36 @@ use polpav\framework\db\AdapterSqlite;
 use polpav\framework\db\AdapterPostgre;
 
 
+
 class FactoryAdapter
 {
-    private static $adapter;
+
+    private static $adapters = [];
 
 
-    static public function getConnection($name, $config){
-        switch ($name){
-            case 'mysql': return self::$adapter = new AdapterMysql($config);
+    static public function getConnection($name, $config)
+    {
+        switch ($name) {
+            case 'mysql':
+                if (!isset(self::$adapters['mysql'])) {
+                    self::$adapters['mysql'] = new AdapterMysql($config);
+                }
+                return self::$adapters['mysql'];
                 break;
-            case 'sqlite': return self::$adapter = new AdapterSqlite($config);
+            case 'sqlite':
+                if (!isset(self::$adapters['sqlite'])) {
+                    self::$adapters['mysql'] = new AdapterSqlite($config);
+                }
+                return self::$adapters['mysql'];
                 break;
-            case 'postgres': return self::$adapter = new AdapterPostgre($config);
+            case 'postgres':
+                if (!isset(self::$adapters['postgres'])) {
+                    self::$adapters['postgres'] = new AdapterPostgre($config);
+                }
+                return self::$adapters['postgres'];
                 break;
-            default: return new \Exception("This database not found");
+            default:
+                return new \Exception("This database not found");
         }
     }
 }

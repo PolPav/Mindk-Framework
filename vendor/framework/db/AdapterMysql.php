@@ -16,25 +16,27 @@ class AdapterMysql implements AdapterDB
 
     function  __construct($config){
             $this->db = new \mysqli ($config['db']);
+        var_dump($config['db']);
     }
 
 
     function query($sql){
         $this->db->query($sql);
-        if($this->db->error){
-            echo $this->db->error;
+        if(!$this->db){
+            return $this->db->error;
         }
+        return $this->db;
     }
 
     function fetch($result, $array_type){
         switch ($array_type){
-            case 'index':$this->db->$result->fetch_array(MYSQLI_NUM);
+            case 'index':return $result->fetch_array(MYSQLI_NUM);
                 break;
-            case 'assoc': $this->db->$result->fetch_array(MYSQLI_ASSOC);
+            case 'assoc':return $result->fetch_array(MYSQLI_ASSOC);
                 break;
-            case 'both': $this->db->$result->fetch_array(MYSQLI_BOTH);
+            case 'both':return $result->fetch_array(MYSQLI_BOTH);
                 break;
-            default : echo $result->$this->db->error;
+            default : return $this->db->error;
 
         }
     }
