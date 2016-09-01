@@ -18,7 +18,7 @@ class Router
             self::$_instance = new self($routing_map);
         return self::$_instance;
     }
-    
+
     private function __construct($routing_map){
         $query = $_SERVER['REQUEST_URI'];
         $slash = explode('/', trim($query,'/'));
