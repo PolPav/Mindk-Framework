@@ -16,4 +16,8 @@ class Index extends AShop
         echo "<h2>You in Home Page</h2>";
     }
 
+    public function indexMethod($param){
+        echo "<h3>action: indexAction<br>param: $param</h3>";
+    }
+
 }

@@ -13,10 +13,14 @@ class Catalog extends AShop
 {
     public function __construct(){
         parent::__construct();
-        echo "<h2>You in Catalog</h2>";
+        echo "<h2>You in Catalog!!!</h2>";
     }
 
-    public function catalogMethod($param){
-        echo "<h3>action: catalogMethod,<br> param: $param<br></h3>";
+    public function catalogMethodGet($param){
+        echo "<h3>action: catalogMethodGet,<br> param: $param<br></h3>";
+    }
+
+    public function catalogMethodPost($param){
+        echo "<h3>action: catalogMethodPost,<br> param: $param<br></h3>";
     }
 }
