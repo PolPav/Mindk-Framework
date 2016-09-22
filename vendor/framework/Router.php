@@ -93,13 +93,3 @@ class Router
 
 
 
-//  foreach ($routing_map as $map) {
-//      if ($slash[0] == $map['pattern'] && $_SERVER['REQUEST_METHOD'] == $map['method']) {
-//          $class = new $map['class'];
-//          $class->$map['action']($map['params']);
-//      }
-//      elseif ($slash[0] == $map['pattern'] && $map['method'] == ''){
-//          $class = new $map['class'];
-//          $class->$map['action']($map['params']);
-//      }
-//   }
