@@ -16,11 +16,15 @@ class Catalog extends AShop
         echo "<h2>You in Catalog!!!</h2>";
     }
 
-    public function catalogMethodGet($param){
-        echo "<h3>action: catalogMethodGet,<br> param: $param<br></h3>";
+    public function catalogMethodGet($id){
+        echo "<h3>action: catalogMethodGet,<br> param: $id<br></h3>";
     }
 
     public function catalogMethodPost($param){
         echo "<h3>action: catalogMethodPost,<br> param: $param<br></h3>";
+    }
+
+    public function catalogMethodPut($param){
+        echo "<h3>action: catalogMethodPut,<br> param: $param<br></h3>";
     }
 }

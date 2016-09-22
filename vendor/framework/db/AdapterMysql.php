@@ -15,8 +15,9 @@ class AdapterMysql implements AdapterDB
 
 
     function  __construct($config){
-            $this->db = new \mysqli ($config['db']);
-        var_dump($config['db']);
+            $this->db = new \mysqli($config['db']['host'],$config['db']['user'],
+                                    $config['db']['password'],$config['db']['db_name']);
+        var_dump($config['db']['driver']);
     }
 
 

@@ -28,21 +28,18 @@ class App
         return "<h3>Not correctly input configuration property</h3>";
     }
 
-    /** function takes a array  configuration, and passing array of routes
+    /** function takes a array  configuration,
      * App constructor
      * @param $config
      */
     public function __construct($config){
         $this->config = $config;
-        $this->route($config['routes']);
     }
 
+    /** function call function from initialized routing,
+     */
     public function run(){
-        echo "<br>Start<br>";
-    }
-
-    public function done(){
-        echo "Done<br>";
+        $this->route($this->config['routes']);
     }
 
     /** function takes a array and call method in selected route
@@ -50,7 +47,8 @@ class App
      * @return object
      */
     public function route($routing_map){
-        return  Router::getInstance($routing_map);
+        $route = Router::getInstance($routing_map);
+        $route->getRoute();
     }
 
 
