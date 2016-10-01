@@ -12,41 +12,42 @@ namespace polpav\framework\db;
 class AdapterMysql implements AdapterDB
 {
     private $db;
+    protected $sql, $query;
 
 
     function  __construct($config){
             $this->db = new \mysqli($config['db']['host'],$config['db']['user'],
                                     $config['db']['password'],$config['db']['db_name']);
-        var_dump($config['db']['driver']);
+        if($this->db){
+            echo 'Connected';
+        }
     }
 
 
     function query($sql){
-
+        $this->sql = $sql;
         $this->db->query($sql);
         if(!$this->db){
             return $this->db->error;
         }
-
-       return $this->db->query($sql);
-
+       // var_dump($this->db->query($sql));
+            return $this->db->query($sql);
     }
 
-    function fetch($result, $array_type){
-        switch ($array_type){
-
-            case 'index':return $result->fetch_array(MYSQLI_NUM);
-                break;
-            case 'assoc':return $result->fetch_array(MYSQLI_ASSOC);
-                break;
-            case 'both':return $result->fetch_array(MYSQLI_BOTH);
-
-            default : return $this->db->error;
-
+    function fetch($type){
+        switch ($type){
+            case 'index': return $this->db->query($this->sql)->fetch_row();
+            break;
+            case 'assoc': return $this->db->query($this->sql)->fetch_assoc();
+            break;
+            case 'all': return $this->db->query($this->sql)->fetch_all();
+            break;
+            default: throw new \Exception("Input not correctly");
         }
+
     }
-    function close()
-    {
+
+    function close(){
        return $this->db->close();
     }
 

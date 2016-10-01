@@ -14,6 +14,7 @@ class Delivery extends AShop
     public function __construct(){
         parent::__construct();
         echo "<h2>You in Delivery</h2>";
+        echo $_GET['x'];
     }
 
     public function deliveryMethod(){

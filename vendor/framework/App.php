@@ -9,12 +9,17 @@
 namespace polpav\framework;
 
 
+use polpav\framework\response\Response;
+use polpav\framework\response\ResponseRedirect;
+
 class App
 {
     /**
      * @var array config
      */
     private $config = [];
+    public $request;
+    public $content;
 
     /**
      * @param $name
@@ -34,21 +39,79 @@ class App
      */
     public function __construct($config){
         $this->config = $config;
+        $this->request = new Request();
     }
 
     /** function call function from initialized routing,
      */
     public function run(){
-        $this->route($this->config['routes']);
+        $route = Router::getInstance($this->config['routes']);
+        $router = $route->getRoute();
+        $this->route($router);
+
     }
 
-    /** function takes a array and call method in selected route
-     * @param $routing_map
-     * @return object
+    /** function send headers and content,
+     * @param $content
+     * @param $status
      */
-    public function route($routing_map){
+    public function response($content, $status = 200){
+        $this->content = $content;
+        $response = new Response($content, $status);
+        $response->send();
+    }
+    public function redirect($link){
+        $redirect = new ResponseRedirect($link);
+        $redirect->send();
+    }
+    public function queryBuilder($pattern, $class, $action, $params){
+        $build = Router::getInstance($this->config['routes']);
+        $build->queryBuild($pattern, $class, $action, $params);
+    }
+
+
+    public function get($pattern, callable $callable = null){
+        $route = Router::getInstance($this->config['routes']);
+        $router = $route->getRoute();
+        if($pattern == $router){
+            $this->route($this->config['pattern']);
+            ob_start();
+            call_user_func($callable);
+        }
+        elseif ($pattern != $router && $callable !=null && $_SERVER['REQUEST_URI'] == $pattern){
+            ob_start();
+            call_user_func($callable);
+        }
+    }
+
+    /** function create Controller and call it action with reflection,
+     *@param $routing_map
+     */
+
+    public function route($routing_map = null){
         $route = Router::getInstance($routing_map);
-        $route->getRoute();
+        if(class_exists($route->getController())){
+            $response = new \ReflectionClass($route->getController());
+            if($response->hasMethod($route->getAction())){
+                $this->render();
+                $class = $response->newInstance();
+                $method = $response->getMethod($route->getAction());
+                $method->invoke($class,$route->getParams());
+            }
+
+        }
+    }
+
+    public function render(){
+        ob_start();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
 

@@ -14,7 +14,7 @@ interface AdapterDB
 
     function query($sql);
 
-    function fetch($result, $array_type);
+    function fetch($type);
 
     function close();
 }

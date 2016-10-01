@@ -13,6 +13,7 @@ class Catalog extends AShop
 {
     public function __construct(){
         parent::__construct();
+        ob_start();
         echo "<h2>You in Catalog!!!</h2>";
     }
 
