@@ -6,11 +6,17 @@
  * Time: 9:39
  */
 
-namespace polpav\framework\response;
+namespace PolPav\Response;
 
 
 class ResponseRedirect extends Response
 {
+    /**
+     * ResponseRedirect construct
+     * sends header from redirect
+     * @param $link,
+     * @param $code
+     */
     public function __construct($link, $code = 302)
     {
         $this->code = $code;

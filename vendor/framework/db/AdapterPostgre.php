@@ -6,7 +6,7 @@
  * Date: 26.08.2016
  * Time: 14:40
  */
-namespace polpav\framework\db;
+namespace PolPav\DB;
 
 
 class AdapterPostgre implements AdapterDB
@@ -18,6 +18,8 @@ class AdapterPostgre implements AdapterDB
     }
 
     function  query($sql){}
-    function  fetch($result, $array_type){}
+    
+    function  fetch($type){}
+    
     function close(){}
 }

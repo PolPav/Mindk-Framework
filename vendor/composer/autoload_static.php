@@ -7,24 +7,24 @@ namespace Composer\Autoload;
 class ComposerStaticInitb0ff6fd9be11af405d3655595edfb8ad
 {
     public static $prefixLengthsPsr4 = array (
-        's' => 
+        'P' => 
         array (
-            'shop\\' => 5,
+            'PolPav\\' => 7,
         ),
-        'p' => 
+        'A' => 
         array (
-            'polpav\\' => 7,
+            'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'shop\\' => 
+        'PolPav\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/',
+            0 => __DIR__ . '/..' . '/framework',
         ),
-        'polpav\\' => 
+        'App\\' => 
         array (
-            0 => 'C:\\OpenServer\\domains\\MindK-Shop\\vendor',
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

@@ -6,10 +6,10 @@
  * Time: 12:16
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Search extends AShop
+class SearchController extends AShopController
 {
 
     public function __construct(){

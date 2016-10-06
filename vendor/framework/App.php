@@ -6,122 +6,100 @@
  * Time: 9:29
  */
 
-namespace polpav\framework;
+namespace PolPav;
 
 
-use polpav\framework\response\Response;
-use polpav\framework\response\ResponseRedirect;
+use PolPav\Response\Response;
+
 
 class App
 {
     /**
      * @var array config
      */
-    private $config = [];
-    public $request;
-    public $content;
 
+    private $config = [];
+    
     /**
      * @param $name
-     *
      * @return array $config
      */
-    public function __get($name){
+
+    public function __get($name)
+    {
         if ($name == 'config'){
             return $this->config;
         }
-        return "<h3>Not correctly input configuration property</h3>";
+            return "<h3>Not correctly input configuration property</h3>";
     }
 
     /** function takes a array  configuration,
      * App constructor
      * @param $config
      */
-    public function __construct($config){
+
+    public function __construct($config)
+    {
         $this->config = $config;
-        $this->request = new Request();
     }
-
-    /** function call function from initialized routing,
+    
+    /**
+     * function takes request, find route and give response,
      */
-    public function run(){
-        $route = Router::getInstance($this->config['routes']);
-        $router = $route->getRoute();
-        $this->route($router);
 
-    }
-
-    /** function send headers and content,
-     * @param $content
-     * @param $status
-     */
-    public function response($content, $status = 200){
-        $this->content = $content;
-        $response = new Response($content, $status);
+    public function run()
+    {
+        $request = new Request();
+        $request->get();
+        $current_route = Router::getInstance($this->config['routes']);
+        $response = new Response();
         $response->send();
+        if($request->get() == $current_route->getRoute()) {
+            $this->route($current_route->getRoute());
+        }
     }
-    public function redirect($link){
-        $redirect = new ResponseRedirect($link);
-        $redirect->send();
-    }
-    public function queryBuilder($pattern, $class, $action, $params){
+
+    /**
+     *function dynamically add new configuration
+     *@param $pattern
+     * @param $class
+     * @param $action
+     * @param $params
+     */
+
+    public function queryBuilder($pattern, $class, $action, $params)
+    {
         $build = Router::getInstance($this->config['routes']);
         $build->queryBuild($pattern, $class, $action, $params);
     }
 
-
-    public function get($pattern, callable $callable = null){
-        $route = Router::getInstance($this->config['routes']);
-        $router = $route->getRoute();
-        if($pattern == $router){
-            $this->route($this->config['pattern']);
-            ob_start();
-            call_user_func($callable);
-        }
-        elseif ($pattern != $router && $callable !=null && $_SERVER['REQUEST_URI'] == $pattern){
-            ob_start();
-            call_user_func($callable);
-        }
-    }
-
-    /** function create Controller and call it action with reflection,
+    /**
+     * function create Controller and call it action with reflection,
      *@param $routing_map
      */
 
-    public function route($routing_map = null){
+    public function route($routing_map = null)
+    {
         $route = Router::getInstance($routing_map);
         if(class_exists($route->getController())){
-            $response = new \ReflectionClass($route->getController());
-            if($response->hasMethod($route->getAction())){
-                $this->render();
-                $class = $response->newInstance();
-                $method = $response->getMethod($route->getAction());
+            $front = new \ReflectionClass($route->getController());
+            if($front->hasMethod($route->getAction())){
+                $class = $front->newInstance();
+                $method = $front->getMethod($route->getAction());
                 $method->invoke($class,$route->getParams());
             }
-
         }
     }
-
-    public function render(){
-        ob_start();
-    }
-
+    
     /**
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-
-    /** function takes a $name database and configuration to connected with factory method getConnection()
+     * function takes a $name database and configuration to connected with correct database()
      * @param $name
      * @param $config
      * @return object
      */
-
-    public function connect($name, $config){
+    
+    public function connect($name, $config)
+    {
        return FactoryAdapter::getConnection($name, $config);
     }
 }

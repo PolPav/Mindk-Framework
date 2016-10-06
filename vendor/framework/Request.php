@@ -6,51 +6,46 @@
  * Time: 13:59
  */
 
-namespace polpav\framework;
+namespace PolPav;
 
 
 class Request
 {
 
-    public function get($key = null)
+    public function get($id = null)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET' && $key == null){
-                return $_GET;
+        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $key = key($_GET);
+            preg_match('/\/([a-z0-9]+)(\/?)([a-z0-9]+)(\/?)([a-z0-9]*)/', $key, $pattern);
+            $route = '/'.$pattern[3];
+            if($pattern[5]!= null) {
+                $route = '/' . $pattern[3] . '/' . $pattern[5];
+                $_GET[$id] = $pattern[5];
+            }
+                return $route;
         }
-        elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && $key != null){
-            //    var_dump($_GET[$key]);
-                return $_GET[$key];
-        } else {return null;}
-    }
+            return null;
+   }
 
-    public function post($key = null)
+    public function post($id = null)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $key == null){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $id == null){
             return $_POST;
         }
-        elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $key != null){
-           // var_dump($_POST[$key]);
-                return $_POST[$key];
-        } else {return null;}
+        elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $id != null){
+            return $_POST[$id];
+        } 
+            return null;
     }
 
-    public function put($key = null)
+    public function put($id = null)
     {
-        return $this->post($key);
+        return $this->post($id);
     }
 
-    public function delete($key = null)
+    public function delete($id = null)
     {
-        return $this->post($key);
+        return $this->post($id);
     }
-
-
-
-    public function containerShow(){
-       // var_dump($_REQUEST);
-       // var_dump($_GET['name']);
-       // var_dump($_POST);
-       // var_dump($_GET);
-
-    }
+   
 }

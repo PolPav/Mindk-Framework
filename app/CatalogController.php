@@ -6,14 +6,13 @@
  * Time: 12:15
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Catalog extends AShop
+class CatalogController extends AShopController
 {
     public function __construct(){
         parent::__construct();
-        ob_start();
         echo "<h2>You in Catalog!!!</h2>";
     }
 

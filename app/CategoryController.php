@@ -6,13 +6,12 @@
  * Time: 10:02
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Category extends AShop {
+class CategoryController extends AShopController {
     public function __construct(){
         parent::__construct();
-        ob_start();
         echo "<h2>You in Category!!!</h2>";
     }
 

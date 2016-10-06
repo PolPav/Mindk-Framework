@@ -6,7 +6,7 @@
  * Date: 26.08.2016
  * Time: 14:39
  */
-namespace polpav\framework\db;
+namespace PolPav\DB;
 
 
 interface AdapterDB

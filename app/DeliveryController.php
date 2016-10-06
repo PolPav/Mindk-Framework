@@ -6,15 +6,14 @@
  * Time: 12:17
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Delivery extends AShop
+class DeliveryController extends AShopController
 {
     public function __construct(){
         parent::__construct();
         echo "<h2>You in Delivery</h2>";
-        echo $_GET['x'];
     }
 
     public function deliveryMethod(){

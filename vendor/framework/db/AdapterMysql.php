@@ -6,7 +6,7 @@
  * Date: 26.08.2016
  * Time: 14:39
  */
-namespace polpav\framework\db;
+namespace PolPav\DB;
 
 
 class AdapterMysql implements AdapterDB
@@ -23,14 +23,12 @@ class AdapterMysql implements AdapterDB
         }
     }
 
-
     function query($sql){
-        $this->sql = $sql;
-        $this->db->query($sql);
+            $this->sql = $sql;
+            $this->db->query($sql);
         if(!$this->db){
             return $this->db->error;
         }
-       // var_dump($this->db->query($sql));
             return $this->db->query($sql);
     }
 
