@@ -6,10 +6,10 @@
  * Time: 15:19
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Index extends AShop
+class IndexController extends AShopController
 {
     public function __construct(){
         parent::__construct();

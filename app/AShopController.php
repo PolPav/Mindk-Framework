@@ -6,10 +6,10 @@
  * Time: 12:19
  */
 
-namespace shop\app;
+namespace App;
 
 
-abstract class AShop
+abstract class AShopController
 {
     public function __construct(){
         echo "<br><h1>Hello Guest</h1><br>";

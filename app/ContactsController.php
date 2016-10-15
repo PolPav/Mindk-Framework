@@ -6,10 +6,10 @@
  * Time: 12:17
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Contacts extends AShop
+class ContactsController extends AShopController
 {
     public function __construct(){
         parent::__construct();

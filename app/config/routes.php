@@ -1,30 +1,47 @@
 <?php
 return[
 
-    ['pattern' => '',
-        'class' => 'shop\app\Index@indexMethod:param',
-        'method' => ''],
+    ['pattern' => '/',
+        'class' => 'App\IndexController',
+        'action' => 'indexMethod'],
 
 
     ['pattern' => '/catalog',
-        'class' => 'shop\app\Catalog@catalogMethodGet:catalog_get_params',
+        'class' => 'App\CatalogController',
+        'action' => 'catalogMethodGet',
+        'params' => 'get_params',
         'method' => 'GET'],
 
     ['pattern' => '/catalog',
-        'class' => 'shop\app\Catalog@catalogMethodPost:catalog_post_params',
+        'class' => 'App\CatalogController',
+        'action' => 'catalogMethodPost',
+        'params' => 'post_params',
         'method' => 'POST'],
+
+    ['pattern' => '/catalog',
+        'class' => 'App\CatalogController',
+        'action' => 'catalogMethodPut',
+        'params' => 'put_params',
+        'method' => 'PUT',],
 
 
     ['pattern' => '/basket',
-        'class' => 'shop\app\Basket@basketMethod:param_basket'],
+        'class' => 'App\BasketController',
+        'action' => 'basketMethod',
+        'params' => true],
 
     ['pattern' => '/delivery',
-        'class' => 'shop\app\Delivery@deliveryMethod:'],
+        'class' => 'App\DeliveryController',
+        'action' => 'deliveryMethod'
+    ],
 
-    ['pattern' => '/search',
-        'class' => 'shop\app\Search@searchMethod:param_search'],
+    ['pattern' => '/search/id',
+        'class' => 'App\SearchController',
+        'action' => 'searchMethod',
+        'params' => 9],
 
 
     ['pattern' => '/contacts',
-        'class' => 'shop\app\Contacts@contactsMethod:param_contacts'],
+        'class' => 'App\ContactsController',
+        'action' => 'contactsMethod'],
 ];

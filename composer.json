@@ -9,12 +9,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "shop\\": ""
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "polpav\\": "vendor/"
+      "App\\": "app/",
+      "PolPav\\": "vendor/framework"
     }
   }
 }

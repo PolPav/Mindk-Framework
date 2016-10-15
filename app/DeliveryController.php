@@ -6,10 +6,10 @@
  * Time: 12:17
  */
 
-namespace shop\app;
+namespace App;
 
 
-class Delivery extends AShop
+class DeliveryController extends AShopController
 {
     public function __construct(){
         parent::__construct();
