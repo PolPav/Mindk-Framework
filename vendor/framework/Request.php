@@ -14,11 +14,19 @@ class Request
     const METHOD_PUT = 'PUT';
     const METHOD_DELETE = 'DELETE';
 
+<<<<<<< HEAD
     
     /**
     * Get method
     * 
     *@return string
+=======
+
+    /**
+    * Get method
+    * 
+    * @return string
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
     */
     public function getMethod()
     {
@@ -28,7 +36,11 @@ class Request
     /**
      * Get uri
      * 
+<<<<<<< HEAD
      *@return string
+=======
+     * @return string
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function getUri()
@@ -39,7 +51,11 @@ class Request
     /**
      * Get client IP
      * 
+<<<<<<< HEAD
      *@return string
+=======
+     * @return string
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function getIP()
@@ -50,7 +66,11 @@ class Request
     /**
      * Get script name
      * 
+<<<<<<< HEAD
      *@return string
+=======
+     * @return string
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function getScriptName()
@@ -61,7 +81,11 @@ class Request
     /**
      * is put request
      * 
+<<<<<<< HEAD
      *@return bool
+=======
+     * @return bool
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function isPut()
@@ -72,7 +96,11 @@ class Request
     /**
      * is delete request
      * 
+<<<<<<< HEAD
      *@return bool
+=======
+     * @return bool
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function isDelete()
@@ -84,12 +112,17 @@ class Request
      * this method return string for request by GET, if parameter true return request with parameter
      * 
      * @param $id
+<<<<<<< HEAD
      *@return array
+=======
+     * @return array
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function get($id = null)
     {
         $key = key($_GET);
+<<<<<<< HEAD
         preg_match('/\/([a-z0-9]*)(\/?)([a-z0-9]*)(\/?)([a-z0-9]*)(\/?)([a-z0-9]*)/', $key, $pattern);
         $route = '/'.$pattern[3];
         if($pattern[5] !=  null) {
@@ -101,6 +134,14 @@ class Request
         if($id == $pattern[3] or $id == $pattern[5] or $id == $pattern[7]){
             return $_GET[$id];
         }
+=======
+        preg_match('/\/([a-z0-9]+)(\/?)([a-z0-9]+)(\/?)([a-z0-9]*)/', $key, $pattern);
+        $route = '/'.$pattern[3];
+        if($pattern[5]!= null) {
+            $route = '/' . $pattern[3] . '/' . $pattern[5];
+            $_GET[$id] = $pattern[5];
+        }
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
         return $route;
     }
 
@@ -108,7 +149,11 @@ class Request
      * this method return string for request by POST, if parameter true return request with parameter
      * 
      * @param $id
+<<<<<<< HEAD
      *@return array
+=======
+     * @return array
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function post($id = null)
@@ -121,10 +166,17 @@ class Request
     }
 
     /**
+<<<<<<< HEAD
      * this method return string for request by PUT, if parameter true return request with parameter
      * 
      * @param $id
      *@return array
+=======
+     * fetch data for request by PUT
+     * 
+     * @param $id
+     * @return array
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function put($id = null)
@@ -136,10 +188,17 @@ class Request
     }
 
     /**
+<<<<<<< HEAD
      * this method return string for request by DELETE, if parameter true return request with parameter
      * 
      * @param $id
      *@return array
+=======
+     * fetch data for request by DELETE
+     * 
+     * @param $id
+     * @return array
+>>>>>>> a1353fa76551a053289d08e68140657587608b52
      */
 
     public function delete($id = null)
@@ -149,5 +208,4 @@ class Request
         }
             return null;
     }
-   
 }
