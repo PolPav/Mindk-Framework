@@ -8,23 +8,54 @@
 
 namespace App;
 
+use PolPav\DI\Service;
+use PolPav\View\Render;
 
-class CatalogController extends AShopController
+
+class CatalogController
 {
-    public function __construct(){
-        parent::__construct();
-        echo "<h2>You in Catalog!!!</h2>";
+
+    public $product, $response, $redirect;
+
+    /**
+     * CatalogController constructor
+     * this method initialize services
+     */
+
+    public function __construct()
+    {
+        $this->product = Service::getService('product');
+        $this->response = Service::getService('response');
+        $this->redirect = Service::getService('redirect');
     }
 
-    public function catalogMethodGet($id){
-        echo "<h3>action: catalogMethodGet,<br> param: $id<br></h3>";
+    /**
+     * this method get products to catalog
+     */
+
+    public function catalogAction()
+    {
+        $obj = $this->product;
+        $products = $obj->getProducts();
+        Render::bustArray($products);
+        
+        $buffer = Render::view('catalog.template.php');
+        $this->response->add($buffer);
+
     }
 
-    public function catalogMethodPost($param){
-        echo "<h3>action: catalogMethodPost,<br> param: $param<br></h3>";
-    }
+    /**
+     * this method add products to basket
+     * @param $id
+     */
 
-    public function catalogMethodPut($param){
-        echo "<h3>action: catalogMethodPut,<br> param: $param<br></h3>";
+    public function addAction($id){
+        if($id){
+            $file = "$id|";
+           file_put_contents('basket.log', $file, FILE_APPEND);
+        }
+
+        $this->redirect->redirect('/catalog');
     }
+    
 }

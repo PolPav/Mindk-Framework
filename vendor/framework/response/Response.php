@@ -18,10 +18,12 @@ class Response
     public $content_type = 'text/html';
     const STATUS_MSGS = [
         200 => 'Okay',
-        201 => 'Created',
+        201 => 'Created New',
+        403 => 'Forbidden',
         404 => 'Not Found',
         301 => 'Moved Permanently',
-        302 => 'My redirect'
+        302 => 'My redirect',
+        500 => 'Server Error'
     ];
     /**
      * Response construct
@@ -30,11 +32,25 @@ class Response
      * @param $code
     */
     
-    public function __construct($data=null, $code = 200)
+    public function __construct($data = null, $code = 200)
     {
         $this->code = $code;
         $this->setContent($data);
         $this->setHeader('Content-Type', $this->content_type);
+    }
+
+    /**
+     * sets the value of the header and content as a service
+     * @param $data,
+     * @param $code
+     */
+
+    public function add($data = null, $code = 200)
+    {
+        $this->code = $code;
+        $this->setContent($data);
+        $this->setHeader('Content-Type', $this->content_type);
+        $this->send();
     }
     
     /**
@@ -52,6 +68,7 @@ class Response
     public function sendHeaders()
     {
         header("HTTP/1.1 ".$this->code." ".self::STATUS_MSGS[$this->code]);
+        
         if(!empty($this->headers)){
             foreach($this->headers as $key=>$value){
                     header(sprintf('%s: %s', $key, $value));

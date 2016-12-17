@@ -17,10 +17,23 @@ class ResponseRedirect extends Response
      * @param $link,
      * @param $code
      */
-    public function __construct($link, $code = 302)
+    public function __construct($link = null, $code = 302)
     {
         $this->code = $code;
-        $this->setHeader('Location',$link);
+        $this->setHeader('Location', $link);
+    }
+
+    /**
+     * sends header from redirect as a service
+     * @param $link,
+     * @param $code
+     */
+
+    public function redirect($link, $code = 302)
+    {
+        $this->code = $code;
+        $this->setHeader('Location', $link);
+        $this->send();
     }
 
 }

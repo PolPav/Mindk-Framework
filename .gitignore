@@ -1,3 +1,7 @@
 .idea
+.htpasswd
 error.log
 config.php
+file.log
+orders.log
+img

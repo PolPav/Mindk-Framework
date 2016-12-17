@@ -2,22 +2,46 @@
 /**
  * Created by PhpStorm.
  * User: PolPav
- * Date: 16.08.2016
- * Time: 12:16
+ * Date: 21.11.2016
+ * Time: 14:11
  */
 
 namespace App;
 
+use PolPav\DI\Service;
+use PolPav\View\Render;
 
-class SearchController extends AShopController
+
+
+class SearchController
 {
+    public $product, $response;
 
-    public function __construct(){
-        parent::__construct();
-        echo "<h2>You in Search</h2>";
+    /**
+     * SearchController construct
+     * this method initialize services
+     */
+
+    public function __construct()
+    {
+        $this->product = Service::getService('product');
+        $this->response = Service::getService('response');
     }
 
-    public function searchMethod($param){
-        echo "<h3>action: searchMethod,<br> param: $param<br></h3>";
+    /**
+     * this method get products for search
+     */
+
+    public function searchAction()
+    {
+        $service = $this->product;
+
+        if(!empty($_POST)){
+            $search = strip_tags($_POST['search']);
+            $products = $service->getProductSearch($search);
+            Render::bustArray($products);
+            $buffer = Render::view('catalog.template.php');
+            $this->response->add($buffer);
+        }
     }
 }

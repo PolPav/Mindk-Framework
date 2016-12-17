@@ -3,45 +3,40 @@ return[
 
     ['pattern' => '/',
         'class' => 'App\IndexController',
-        'action' => 'indexMethod'],
-
-
-    ['pattern' => '/catalog',
-        'class' => 'App\CatalogController',
-        'action' => 'catalogMethodGet',
-        'params' => 'get_params',
+        'action' => 'indexAction',
         'method' => 'GET'],
 
     ['pattern' => '/catalog',
         'class' => 'App\CatalogController',
-        'action' => 'catalogMethodPost',
-        'params' => 'post_params',
-        'method' => 'POST'],
+        'action' => 'catalogAction',
+        'method' => 'GET'],
 
-    ['pattern' => '/catalog',
-        'class' => 'App\CatalogController',
-        'action' => 'catalogMethodPut',
-        'params' => 'put_params',
-        'method' => 'PUT',],
-
+    ['pattern' => '/category',
+        'class' => 'App\CategoryController',
+        'action' => 'categoryAction',
+        'method' => 'GET'],
+    
+    ['pattern' => '/login',
+        'class' => 'App\LoginController',
+        'action' => 'checkUser'],
 
     ['pattern' => '/basket',
         'class' => 'App\BasketController',
-        'action' => 'basketMethod',
-        'params' => true],
+        'action' => 'basketAction'],
 
-    ['pattern' => '/delivery',
-        'class' => 'App\DeliveryController',
-        'action' => 'deliveryMethod'
-    ],
+    ['pattern' => '/admin',
+        'class' => 'App\AdminController',
+        'action' => 'adminPanel'],
 
-    ['pattern' => '/search/id',
+    ['pattern' => '/admin/add',
+        'class' => 'App\AdminController',
+        'action' => 'addProductToCatalog'],
+
+    ['pattern' => '/order',
+        'class' => 'App\BasketController',
+        'action' => 'addOrder'],
+
+    ['pattern' => '/search',
         'class' => 'App\SearchController',
-        'action' => 'searchMethod',
-        'params' => 9],
-
-
-    ['pattern' => '/contacts',
-        'class' => 'App\ContactsController',
-        'action' => 'contactsMethod'],
+        'action' => 'searchAction']
 ];

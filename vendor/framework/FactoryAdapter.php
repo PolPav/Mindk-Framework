@@ -49,7 +49,7 @@ class FactoryAdapter
                 return self::$adapters['postgres'];
                 break;
             default:
-                return new \Exception("This database not found");
+                return "This database not found";
         }
     }
 }

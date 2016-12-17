@@ -12,7 +12,7 @@ namespace PolPav;
     class Router
     {
         private static $route;
-        protected $controller, $action, $params, $router, $routing_map, $id;
+        protected $controller, $action, $params, $router, $routing_map;
         
         public static function getInstance($routing_map = null)
         {
@@ -33,47 +33,63 @@ namespace PolPav;
         }
 
         /**
-         *function add new configuration
-         *@param $pattern
+         * this method add new configuration
+         * @param $pattern
          * @param $class
          * @param $action
          * @param $params
          */
-       public function queryBuild($pattern, $class, $action, $params)
+       public function configBuilder($pattern, $class, $action, $params)
         {
             $build = ['pattern' => $pattern,
-                'class' => $class,
-                'action' => $action,
-                'params' => $params];
+                        'class' => $class,
+                        'action' => $action,
+                        'params' => $params];
             $this->routing_map[] = $build;
         }
 
         /**
-         * function check the url and return route if available
+         * this method build url
+         * @param $link
+         * @param $params
          * @return string
          */
+        public function uriBuilder($link, $params = []){
+            $key = key($params);
+
+            if($params) {
+                $query = $link . '/' . $params[$key];
+                return $query;
+
+            } else {
+                return $link;
+            }
+        }
+
+        /** 
+         * this method create routing
+         */
+       
         public function getRoute()
         {
             $query = $_SERVER['REQUEST_URI'];
+            $link = explode('/', $query);
+            $pattern = '/' . $link[1];
+            foreach ($this->routing_map as $map){
 
-            preg_match('/\/([a-z0-9]+)(\/?)([a-z0-9]+)/', $query, $pattern);
-                if($pattern[0]==null){
-                    $pattern[0] = '/';
-            }
-            foreach ($this->routing_map as $map) {
-                if ($pattern[0] == $map['pattern'] && $_SERVER['REQUEST_METHOD'] == $map['method']) {
-                    $this->router = $map['pattern'];
+                if($pattern == $map['pattern']){
                     $this->controller = $map['class'];
-                    $this->action = $map['action'];
-                    $this->params = $map['params'];
-                } elseif ($pattern[0] == $map['pattern'] && $map['method'] == '') {
-                    $this->router = $map['pattern'];
-                    $this->controller = $map['class'];
-                    $this->action = $map['action'];
-                    $this->params = $map['params'];
+                    $this->action = $link[2].'Action';
+                    if ($link[3] !== null) {
+                         $this->params = $link[3];
+                        }
+                    }
+
+                if($pattern == $map['pattern'] and $link[2] == null and $link[3] == null){
+                        $this->controller = $map['class'];
+                        $this->action = $map['action'];
                 }
             }
-            return $this->router;
         }
 
         public function getController()
