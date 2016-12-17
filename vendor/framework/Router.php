@@ -6,52 +6,107 @@
  * Time: 10:33
  */
 
-namespace polpav\framework;
+namespace PolPav;
 
 
-class Router
-{
-    static $_instance;
+    class Router
+    {
+        private static $route;
+        protected $controller, $action, $params, $router, $routing_map;
+        
+        public static function getInstance($routing_map = null)
+        {
+            if (!(self::$route instanceof self))
+                self::$route = new self($routing_map);
+                return self::$route;
+        }
 
-    public static function getInstance($routing_map) {
-        if(!(self::$_instance instanceof self))
-            self::$_instance = new self($routing_map);
-        return self::$_instance;
+        /**
+         * Router constructor
+         * function initialize routing
+         * @param $routing_map
+         */
+
+        private function __construct($routing_map = null)
+        {
+            $this->routing_map = $routing_map;
+        }
+
+        /**
+         * this method add new configuration
+         * @param $pattern
+         * @param $class
+         * @param $action
+         * @param $params
+         */
+       public function configBuilder($pattern, $class, $action, $params)
+        {
+            $build = ['pattern' => $pattern,
+                        'class' => $class,
+                        'action' => $action,
+                        'params' => $params];
+            $this->routing_map[] = $build;
+        }
+
+        /**
+         * this method build url
+         * @param $link
+         * @param $params
+         * @return string
+         */
+        public function uriBuilder($link, $params = []){
+            $key = key($params);
+
+            if($params) {
+                $query = $link . '/' . $params[$key];
+                return $query;
+
+            } else {
+                return $link;
+            }
+        }
+
+        /** 
+         * this method create routing
+         */
+       
+        public function getRoute()
+        {
+            $query = $_SERVER['REQUEST_URI'];
+            $link = explode('/', $query);
+            $pattern = '/' . $link[1];
+            foreach ($this->routing_map as $map){
+
+                if($pattern == $map['pattern']){
+                    $this->controller = $map['class'];
+                    $this->action = $link[2].'Action';
+                    if ($link[3] !== null) {
+                         $this->params = $link[3];
+                        }
+                    }
+
+                if($pattern == $map['pattern'] and $link[2] == null and $link[3] == null){
+                        $this->controller = $map['class'];
+                        $this->action = $map['action'];
+                }
+            }
+        }
+
+        public function getController()
+        {
+            return $this->controller;
+        }
+
+        public function getAction()
+        {
+            return $this->action;
+        }
+
+        public function getParams()
+        {
+            return $this->params;
+        }
+
+
     }
 
-    private function __construct($routing_map){
-        $query = $_SERVER['REQUEST_URI'];
-        $slash = explode('/', trim($query,'/'));
-        if($slash[0] == $routing_map[0]['pattern']) {
-             new $routing_map[0]['class'];
-        }
-
-        if($slash[0] == $routing_map[1]['pattern']){
-            $class = new $routing_map[1]['class'];
-            $class->$routing_map[1]['method']($slash[1]);
-
-        }
-
-        if($slash[0] == $routing_map[2]['pattern']){
-            $class = new $routing_map[2]['class'];
-            $class->$routing_map[2]['method']($slash[1]);
-        }
-
-        if($slash[0] == $routing_map[3]['pattern']){
-            $class = new $routing_map[3]['class'];
-            $class->$routing_map[3]['method']($slash[1]);
-        }
-
-        if($slash[0] == $routing_map[4]['pattern']){
-            $class = new $routing_map[4]['class'];
-            $class->$routing_map[4]['method']($slash[1]);
-        }
-
-        if($slash[0] == $routing_map[5]['pattern']){
-            $class = new $routing_map[5]['class'];
-            $class->$routing_map[5]['method']($slash[1]);
-        }
-
-    }
-
-}

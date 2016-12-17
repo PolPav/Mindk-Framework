@@ -1,29 +1,42 @@
 <?php
 return[
 
-    ['pattern' => '',
-        'class' => 'shop\app\Index'],
+    ['pattern' => '/',
+        'class' => 'App\IndexController',
+        'action' => 'indexAction',
+        'method' => 'GET'],
 
+    ['pattern' => '/catalog',
+        'class' => 'App\CatalogController',
+        'action' => 'catalogAction',
+        'method' => 'GET'],
 
-    ['pattern' => 'catalog',
-        'class' => 'shop\app\Catalog',
-        'method' => 'catalogMethod'],
+    ['pattern' => '/category',
+        'class' => 'App\CategoryController',
+        'action' => 'categoryAction',
+        'method' => 'GET'],
+    
+    ['pattern' => '/login',
+        'class' => 'App\LoginController',
+        'action' => 'checkUser'],
 
-    ['pattern' => 'basket',
-        'class' => 'shop\app\Basket',
-        'method' => 'basketMethod'],
+    ['pattern' => '/basket',
+        'class' => 'App\BasketController',
+        'action' => 'basketAction'],
 
-    ['pattern' => 'delivery',
-        'class' => 'shop\app\Delivery',
-        'method' => 'deliveryMethod'],
+    ['pattern' => '/admin',
+        'class' => 'App\AdminController',
+        'action' => 'adminPanel'],
 
-    ['pattern' => 'search',
-        'class' => 'shop\app\Search',
-        'method' => 'searchMethod'],
+    ['pattern' => '/admin/add',
+        'class' => 'App\AdminController',
+        'action' => 'addProductToCatalog'],
 
+    ['pattern' => '/order',
+        'class' => 'App\BasketController',
+        'action' => 'addOrder'],
 
-    ['pattern' => 'contacts',
-        'class' => 'shop\app\Contacts',
-        'method' => 'contactsMethod'],
-
+    ['pattern' => '/search',
+        'class' => 'App\SearchController',
+        'action' => 'searchAction']
 ];
