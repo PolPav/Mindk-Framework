@@ -31,6 +31,11 @@ namespace PolPav;
         {
             $this->routing_map = $routing_map;
         }
+        
+        /**
+        * private clone for Singleton
+        */
+        private function __clone(){}
 
         /**
          * this method add new configuration
