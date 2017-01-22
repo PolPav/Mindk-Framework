@@ -79,6 +79,8 @@ class LoginController
                 Logger::passwordError('../app/admin/file.log', 'Неправильный пароль');
             }
         }
+        $buffer = Render::view('admin.template.php');
+        return $this->response->add($buffer);
     }
 }
 

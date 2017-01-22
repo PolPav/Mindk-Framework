@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-lg-8">
             <ul>
+                
                 <h1>Enter your login and password</h1>
                 <form class="form-inline" action="/login" method="post">
                     <div class="form-group">
