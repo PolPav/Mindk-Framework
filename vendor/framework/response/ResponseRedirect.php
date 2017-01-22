@@ -11,16 +11,19 @@ namespace PolPav\Response;
 
 class ResponseRedirect extends Response
 {
+
     /**
-     * ResponseRedirect construct
-     * sends header from redirect
+     * sends header from redirect as a service
      * @param $link,
      * @param $code
+     * @return object
      */
-    public function __construct($link, $code = 302)
+
+    public function redirect($link, $code = 302)
     {
         $this->code = $code;
-        $this->setHeader('Location',$link);
+        $this->setHeader('Location', $link);
+        return $this;
     }
 
 }

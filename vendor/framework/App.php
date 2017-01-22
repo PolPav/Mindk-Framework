@@ -9,8 +9,9 @@
 namespace PolPav;
 
 
+use PolPav\DI\Service;
 use PolPav\Response\Response;
-
+use PolPav\View\Render;
 
 class App
 {
@@ -19,87 +20,60 @@ class App
      */
 
     private $config = [];
-    
-    /**
-     * @param $name
-     * @return array $config
-     */
+    public $services, $response;
+    public $session;
 
-    public function __get($name)
-    {
-        if ($name == 'config'){
-            return $this->config;
-        }
-            return "<h3>Not correctly input configuration property</h3>";
-    }
-
-    /** function takes a array  configuration,
+    /** 
+     * this method takes a array  configuration,
      * App constructor
      * @param $config
      */
 
-    public function __construct($config)
+    public function __construct($config = null)
     {
         $this->config = $config;
-    }
-    
-    /**
-     * function takes request, find route and give response,
-     */
-
-    public function run()
-    {
-        $request = new Request();
-        $request->get();
-        $current_route = Router::getInstance($this->config['routes']);
-        $response = new Response();
-        $response->send();
-        if($request->get() == $current_route->getRoute()) {
-            $this->route($current_route->getRoute());
-        }
+        $this->services = new Service($this->config['services']);
+        $this->response = Service::getService('response');
     }
 
     /**
-     *function dynamically add new configuration
-     *@param $pattern
+     * this method dynamically add new configuration
+     * @param $pattern
      * @param $class
      * @param $action
      * @param $params
      */
 
-    public function queryBuilder($pattern, $class, $action, $params)
+    public function addConfig($pattern, $class, $action, $params)
     {
         $build = Router::getInstance($this->config['routes']);
-        $build->queryBuild($pattern, $class, $action, $params);
+        $build->configBuilder($pattern, $class, $action, $params);
     }
-
+    
     /**
-     * function create Controller and call it action with reflection,
-     *@param $routing_map
+     * this method create Controller and call it action with reflection,
      */
 
-    public function route($routing_map = null)
+    public function run()
     {
+        $routing_map = $this->config['routes'];
         $route = Router::getInstance($routing_map);
+        $route->getRoute();
         if(class_exists($route->getController())){
             $front = new \ReflectionClass($route->getController());
+
             if($front->hasMethod($route->getAction())){
                 $class = $front->newInstance();
                 $method = $front->getMethod($route->getAction());
-                $method->invoke($class,$route->getParams());
+                $response = $method->invoke($class,$route->getParams());
+                if($response instanceof Response){
+                    $response->send();
+                }
             }
+            
+        } else {
+            $buffer = Render::view('not_found.template.php');
+            return $this->response->add($buffer, 404);
         }
-    }
-    
-    /**
-     * function takes a $name database and configuration to connected with correct database()
-     * @param $name
-     * @param $config
-     * @return object
-     */
-    
-    public function connect($name, $config)
-    {
-       return FactoryAdapter::getConnection($name, $config);
     }
 }

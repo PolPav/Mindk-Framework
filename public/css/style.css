@@ -1,0 +1,324 @@
+body{
+    overflow-x:hidden;
+}
+h1{
+    color: #2aabd2;
+}
+#imageSlider img {
+    width: 100%;
+    height: 150px;
+}
+.btn-info a{
+    text-decoration: none;
+    color: white;
+}
+.container-fluid {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+.header {
+    width: 100%;
+    height: 200px;
+    border: solid gainsboro 1px;
+
+}
+.header-top{
+    width: 100%;
+    height: 49px;
+    padding-top: 8px;
+    border: solid gainsboro 1px;
+}
+.right{
+    float: right;
+}
+form{
+    float: left;
+    margin-top: 95px;
+    padding-right: 2px;
+}
+
+.order-form{
+    /*margin: 0 auto;*/
+    margin-left: 100px;
+}
+.add-form{
+    margin-top: 0;
+    margin-left: 100px;
+}
+.attr-form{
+    margin-top: 0;
+    margin-left: 80px;
+}
+.btn-add{
+    margin-top: 115px;
+    margin-left: 95px;
+    background-color: #9d9d9d;
+    color: white;
+    width: 308px;
+    height: 60px;
+}
+.save-btn{
+    margin-top: 10px;
+    background-color: lightseagreen;
+    width: 150px;
+    height: 40px;
+    float: right;
+}
+#search{
+    width: 235px;
+    height: 33px;
+    border-radius: 5px;
+    border: 1px solid #E1E1E2;
+    outline: none;
+    position: relative;
+    bottom: 50px;
+    left: 4%;
+    /*padding-bottom: 4px;*/
+}
+
+.button{
+    background-color: #337AB7;
+    color: white;
+    position: relative;
+    bottom: 50px;
+    left: 4%;
+}
+.button:hover{
+    background-color: lightseagreen ;
+    color: gold;
+}
+.i-btn{
+    background-color: brown;
+}
+.c-btn{
+    background-color: seagreen;
+}
+#order-button{
+    margin-top: 10px;
+    float: right;
+    width: 150px;
+    height: 40px;
+}
+.side-bar {
+    width: 23%;
+    height: auto;
+    position: absolute;
+    top: 45%;
+    border: solid gainsboro 1px;
+}
+.content {
+    width: 77%;
+    height: auto;
+    position: relative;
+    float: right;
+}
+.product{
+    padding-left: 5%;
+    margin-left: 5%;
+    margin-top: 1%;
+    border: deepskyblue solid 1px;
+    border-radius: 10%;
+    background-color: lightseagreen;
+}
+.prod-btn{
+    margin-left: 10%;
+    margin-bottom: 2%;
+    background-color: chartreuse;
+    color: whitesmoke;
+}
+.input-sm{
+ position: relative;
+    left: 25%;
+    top: 25px;
+}
+.h-admin{
+    background-color: #333333;
+}
+.h-admin h1{
+    position: relative;
+    left: 40%;
+}
+.h-admin a:hover{
+    color: #2aabd2;
+}
+.top-admin{
+    border: solid gainsboro 1px;
+    height: 60px;
+}
+.sb-admin{
+    position: relative;
+    background-color: #444444;
+    height: 610px;
+    width: 23%;
+    left: 77%;
+    border: solid gainsboro 1px;
+}
+.tool{
+    background-color: gainsboro;
+}
+.c-admin{
+    position: absolute;
+    background-color: gainsboro;
+    height: auto;
+    width: 77%;
+    left: 0;
+}
+.c-admin-w{
+    width: 100%;
+}
+.orders{
+    background-color: gainsboro ;
+}
+.c-admin a{
+    color: white;
+}
+.c-admin a:hover{
+    color: white;
+}
+.create-admin{
+    background-color: #333333;
+    border-radius: 5px;
+}
+.create-content{
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+}
+.min{
+    width: 323px;
+    height: 60px;
+    background-color: #444444;
+
+}
+.min-order{
+    height: 60px;
+    background-color: #444444;
+    width: 100%;
+}
+.min-order h2{
+    color: #3e8f3e;
+    position: relative;
+    left: 42%;
+    bottom: 20px;
+}
+.min h2{
+    color: #3e8f3e;
+    position: relative;
+    left: 95px;
+    bottom: 20px;
+}
+.h-nav{
+    padding: 0;
+    width: 100%;
+    height: 60px;
+    background-color: gainsboro;
+}
+.nav-admin{
+    padding: 0;
+    background-color: #444444 ;
+    border: solid gainsboro 1px;
+    width: 309px;
+    height: 550px;
+}
+.btn-s{
+    width: 308px;
+    height: 50px;
+    float: left;
+    margin-top: 5px;
+    margin-right: 15px;
+    background-color: #888888;
+}
+.btn-c{
+    margin-top: 5px;
+    background-color: #9d9d9d;
+    color: white;
+    width: 308px;
+    height: 60px;
+    float: left;
+}
+.section-admin{
+    /*margin-top: 50px;*/
+}
+.admin{
+    background-color: #337AB7;
+    border-radius: 5px;
+}
+.admin h1{
+    color: white;
+}
+.form-admin{
+    margin-bottom: 50px;
+}
+.form-upload{
+    margin-top: 0;
+    margin-left: 20%;
+}
+.admin-checkbox{
+    color: white;
+}
+.admin-button{
+    color: #337AB7;
+}
+.line{
+    border: hidden;
+}
+.category{
+    width: 100%;
+    height: 50px;
+    background-color: #337AB7 ;
+    border: solid gainsboro 1px;
+    /*border-radius: 5px;*/
+}
+.category p{
+    text-align: center;
+    color: white;
+}
+.prod-list span{
+    color: white;
+}
+.prod-list li{
+
+    color: aqua;
+}
+.category h2{
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+.toolbar-fix{
+    background-color: #444444;
+    height: 610px;
+}
+.toolbar{
+    background-color: #444444;
+    height: 60px;
+}
+.toolbar h2{
+    color: blueviolet;
+}
+.section{
+    list-style-type: none;
+}
+.section li{
+    list-style-type: none;
+}
+.section a{
+    text-decoration: none;
+}
+.block-section:hover{
+    background-color: #a6e1ec;
+}
+.footer{
+    width: 100%;
+    height: 200px;
+    margin-top: auto;
+    border: solid gainsboro 1px;
+}
+.footer-admin{
+    width: 100%;
+    height: 200px;
+    border: solid gainsboro 1px;
+}
+

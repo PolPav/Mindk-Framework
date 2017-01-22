@@ -8,16 +8,20 @@
 
 namespace App;
 
+use PolPav\DI\Service;
+use PolPav\View\Render;
 
-class IndexController extends AShopController
+class IndexController
 {
-    public function __construct(){
-        parent::__construct();
-        echo "<h2>You in Home Page</h2>";
+    /**
+     * this method fills index view
+     */
+    
+    public function indexAction()
+    {
+        Render::$hello = 'Hello Guest';
+        $buffer = Render::view('index.template.php');
+        $response = Service::getService('response');
+        return $response->add($buffer);
     }
-
-    public function indexMethod($param){
-        echo "<h3>action: indexAction<br>param: $param</h3>";
-    }
-
 }
