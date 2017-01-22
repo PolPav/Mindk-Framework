@@ -34,7 +34,7 @@ class CategoryController
     public function categoryAction()
     {
         $buffer = Render::view('catalog.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController
         Render::bustArray($products);
 
         $buffer = Render::view('catalog.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoryController
         Render::bustArray($products);
 
         $buffer = Render::view('catalog.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
     }
 
     /**
@@ -79,6 +79,6 @@ class CategoryController
         Render::bustArray($products);
 
         $buffer = Render::view('catalog.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
     }
 }

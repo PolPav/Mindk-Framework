@@ -40,7 +40,7 @@ class CatalogController
         Render::bustArray($products);
         
         $buffer = Render::view('catalog.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
 
     }
 
@@ -55,7 +55,7 @@ class CatalogController
            file_put_contents('basket.log', $file, FILE_APPEND);
         }
 
-        $this->redirect->redirect('/catalog');
+        return $this->redirect->redirect('/catalog');
     }
     
 }

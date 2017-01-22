@@ -41,7 +41,7 @@ class SearchController
             $products = $service->getProductSearch($search);
             Render::bustArray($products);
             $buffer = Render::view('catalog.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }
     }
 }

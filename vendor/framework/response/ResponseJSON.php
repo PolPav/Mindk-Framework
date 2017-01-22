@@ -14,15 +14,17 @@ class ResponseJSON extends Response
     public $content_type = 'application/json';
 
     /**
-     * ResponseJSON construct
-     * @param $data,
+     * this method add content and headers in JSON format
+     *
+     * @param $data
      * @param $code
-     * sets the value of the header and content if content-type application/json
+     * @return object
      */
-    public function __construct($data, $code = 200)
-    {
+    public function addJson($data = null, $code = 200){
+        $this->code = $code;
         $this->setContent($data);
-        $this->setHeader('Content-Type', $this->content_type);
+        $this->setHeader('Content-type: ', $this->content_type);
+        return $this;
     }
 
     /**

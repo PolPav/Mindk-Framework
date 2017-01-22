@@ -10,6 +10,7 @@ namespace PolPav;
 
 
 use PolPav\DI\Service;
+use PolPav\Response\Response;
 use PolPav\View\Render;
 
 class App
@@ -64,11 +65,15 @@ class App
             if($front->hasMethod($route->getAction())){
                 $class = $front->newInstance();
                 $method = $front->getMethod($route->getAction());
-                $method->invoke($class,$route->getParams());
+                $response = $method->invoke($class,$route->getParams());
+                if($response instanceof Response){
+                    $response->send();
+                }
             }
+            
         } else {
             $buffer = Render::view('not_found.template.php');
-            $this->response->add($buffer, 404);
+            return $this->response->add($buffer, 404);
         }
     }
 }

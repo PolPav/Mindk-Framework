@@ -53,11 +53,11 @@ class LoginController
         Session::sessionStart();
         $session = Session::getSession();
         if ($session['admin'] == 1) {
-            $this->redirect->redirect('/admin');
+            return $this->redirect->redirect('/admin');
         } else {
             if (empty($_POST)) {
                 $buffer = Render::view('admin.template.php');
-                $this->response->add($buffer);
+                return $this->response->add($buffer);
             }
         }
 
@@ -72,7 +72,7 @@ class LoginController
                     if ($security->checkPassword($password, $hash)) {
                         Session::sessionStart();
                         Session::setSession('admin', true);
-                        $this->redirect->redirect('/admin');
+                        return $this->redirect->redirect('/admin');
                     }
                 }
             } catch (ExceptionLogin $e) {

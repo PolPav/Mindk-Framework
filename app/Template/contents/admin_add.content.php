@@ -17,10 +17,10 @@
 //                try {
                     ?>
                     <h1><?= self::$error ?></h1>
-                    <form class="add-form" action="/admin/add" method="post">
+                    <form class="add-form" action="/admin/add" method="post" enctype='multipart/form-data'>
                         <p>Product-name: <input name="product_name" type="text" class="form-control">
                         <p>Category-name: <input name="category_name" type="text" class="form-control">
-                        <p>Image: <input name="image_name" type="text" class="form-control">
+                        <p>Image: <input name="image_name" type="file" class="form-control">
                         <p>Price: <input name="price" type="text" class="form-control">
                             <!--                <p>Attribute-name: <input name="attr_name" type="text" class="form-control">-->
                             <!--                <p>Attribute-value: <input name="attr_value" type="text" class="form-control">-->

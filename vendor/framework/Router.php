@@ -92,6 +92,20 @@ namespace PolPav;
             }
         }
 
+//            for ($i=0; $i<strlen($route['pattern']); $i++) {
+//                if ($route['pattern'][$i] == '{') {
+//                    $preg = preg_replace('/\{.+\}/', $route['params'], $route['pattern']);
+//                    ob_start();
+//                    var_dump($preg);
+//                    $route['pattern'] = $preg;
+//                    if ('/'.$pattern[1].'/'.$pattern[2] == $route['pattern']) {
+//                                $this->controller = $route['class'];
+//                                $this->action = $route['action'];
+//                                $this->params = $pattern[2];
+//                    }
+//                }
+//            }
+
         public function getController()
         {
             return $this->controller;

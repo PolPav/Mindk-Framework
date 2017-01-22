@@ -22,6 +22,6 @@ class IndexController
         Render::$hello = 'Hello Guest';
         $buffer = Render::view('index.template.php');
         $response = Service::getService('response');
-        $response->add($buffer);
+        return $response->add($buffer);
     }
 }

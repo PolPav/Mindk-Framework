@@ -60,7 +60,7 @@ class BasketController
         }
 
         $buffer = Render::view('basket.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
     }
 
     /**
@@ -71,9 +71,9 @@ class BasketController
     {
         if(is_file('basket.log')) {
             unlink('basket.log');
-            $this->redirect->redirect('/catalog');
+           return $this->redirect->redirect('/catalog');
         } else {
-            $this->redirect->redirect('/basket');
+            return $this->redirect->redirect('/basket');
         }
     }
 
@@ -84,10 +84,10 @@ class BasketController
     public function orderAction()
     {
         if(!is_file('basket.log')){
-            $this->redirect->redirect('/basket');
+            return $this->redirect->redirect('/basket');
         } else {
             $buffer = Render::view('order.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }
     }
 
@@ -101,7 +101,7 @@ class BasketController
         if (empty($_POST['name']) or empty($_POST['email']) or empty($_POST['phone']) or empty($_POST['address'])) {
             Render::$error = 'Fill in all the fields';
             $buffer = Render::view('order.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         } else {
             $name = strip_tags($_POST['name']);
             $email = strip_tags($_POST['email']);
@@ -133,7 +133,7 @@ class BasketController
             }
 
             $buffer = Render::view('order_accept.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }
     }
 }

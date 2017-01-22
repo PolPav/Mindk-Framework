@@ -39,7 +39,7 @@ class AdminController
     public function loginAdmin()
     {
         $buffer = Render::view('admin.order.template.php');
-        $this->response->add($buffer);
+        return $this->response->add($buffer);
     }
 
     /**
@@ -50,16 +50,19 @@ class AdminController
     {
         if(empty($_POST)){
             $buffer = Render::view('admin_add.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }else{
 
-            if(empty($_POST['product_name']) or empty($_POST['image_name']) or empty($_POST['price']) or empty($_POST['description'])
+            if(empty($_POST['product_name']) or empty($_FILES['image_name']['name']) or empty($_POST['price']) or empty($_POST['description'])
             or empty($_POST['category_name']) or empty($_POST['attr_name']) or empty($_POST['attr_value'])) {
                 Render::$error = 'Fill in all the fields';
             } else {
                 $product = Service::getService('product');
                 $product->product_name = (string)$_POST['product_name'];
-                $product->image_name = (string)$_POST['image_name'];
+                $product->image_name = (string)$_FILES['image_name']['name'];
+                if(!empty($_FILES['image_name'])) {
+                    Upload::upload('image_name', 'img');
+                }
                 $product->price = (string)$_POST['price'];
                 $product->description = (string)$_POST['description'];
                 $category_name = (string)$_POST['category_name'];
@@ -75,7 +78,7 @@ class AdminController
             }
 
             $buffer = Render::view('admin_add.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }
     }
 
@@ -87,7 +90,7 @@ class AdminController
     {
         if(empty($_POST)){
             $buffer = Render::view('admin_update.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         } else {
             if(empty($_POST['product_name']) or empty($_POST['image_name']) or empty($_POST['price']) or empty($_POST['description'])){
                 Render::$error = 'Fill in all the fields';
@@ -103,7 +106,7 @@ class AdminController
             }
             
                 $buffer = Render::view('admin_update.template.php');
-                $this->response->add($buffer);
+                return $this->response->add($buffer);
         }
     }
 
@@ -115,7 +118,7 @@ class AdminController
     {
         if(empty($_POST)){
             $buffer = Render::view('admin_delete.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         } else {
             $product = Service::getService('product');
             $product->product_name = (string)$_POST['product_name'];
@@ -124,7 +127,7 @@ class AdminController
             $product->deleteProduct($id);
 
             $buffer = Render::view('admin_delete.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }
     }
 
@@ -144,7 +147,7 @@ class AdminController
             $product->addProductAttr();
         }
             $buffer = Render::view('admin_attr.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
 
     }
 
@@ -156,7 +159,7 @@ class AdminController
     {
         if (!is_file(BasketController::ORDERS_FILE)) {
             $buffer = Render::view('admin.show_orders.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         } else {
             $orders = file(BasketController::ORDERS_FILE);
             $all_orders = [];
@@ -175,7 +178,7 @@ class AdminController
             }
             Render::bustArray($all_orders);
             $buffer = Render::view('admin.show_orders.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         }
 
     }
@@ -189,7 +192,7 @@ class AdminController
         $security = new Security();
         if(empty($_POST)){
             $buffer = Render::view('admin_create.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         } else {
             $login = $_POST['login'];
             $password = $_POST['password'];
@@ -197,7 +200,7 @@ class AdminController
             $security->saveUser($login, $hash);
 
             $buffer = Render::view('admin_create.template.php');
-            $this->response->add($buffer, 202);
+            return $this->response->add($buffer, 202);
         }
 
     }
@@ -212,9 +215,9 @@ class AdminController
         $session = Session::getSession();
         if($session['admin'] === true){
             $buffer = Render::view('admin_panel.template.php');
-            $this->response->add($buffer);
+            return $this->response->add($buffer);
         } else {
-            $this->redirect->redirect('/login');
+            return $this->redirect->redirect('/login');
 
         }
     }
@@ -225,11 +228,14 @@ class AdminController
     
     public function uploadAction()
     {
-         $buffer = Render::view('admin_file.template.php');
-         $this->response->add($buffer);
-
-        if(!empty($_FILES['user_file'])){
+        if(empty($_FILES['user_file'])){
+            $buffer = Render::view('admin_file.template.php');
+            return $this->response->add($buffer);
+        } else {
             Upload::upload('user_file', 'img');
+            $buffer = Render::view('admin_file.template.php');
+            return $this->response->add($buffer);
         }
+
     }
 }
