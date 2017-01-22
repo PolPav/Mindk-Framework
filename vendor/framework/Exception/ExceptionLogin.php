@@ -18,7 +18,7 @@ class ExceptionLogin extends \Exception
         parent::__construct($message);
         Render::$error = $message;
         $buffer = Render::view('admin_error.template.php');
-        $response = new Response($buffer, 202);
-        $response->send();
+        $response = new Response();
+        return $response->add($buffer);
     }
 }

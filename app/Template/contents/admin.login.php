@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-lg-8 admin">
             <ul>
+                <h1><?= self::$error ?></h1>
                 <h1>Enter to admin panel</h1>
                 <form class="form-inline form-admin" action="/login" method="post">
                     <div class="form-group">
